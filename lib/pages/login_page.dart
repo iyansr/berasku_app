@@ -1,3 +1,4 @@
+import 'package:berasku_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -7,6 +8,39 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+
+  void _toHomePage() {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      setState(() {
+        name = 'Iyan';
+      });
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => HomePage(name: name, email: email),
+      ));
+    }
+  }
+
+  String _emailValidator(String val) {
+    if (val.isEmpty) {
+      return 'Form Tidak Boleh Kosong';
+    } else if (!val.contains('@')) {
+      return 'Email Salah';
+    }
+  }
+
+  String _passwordValidator(String val) {
+    if (val.isEmpty) {
+      return 'Form Tidak Boleh Kosong';
+    } else if (val.length < 6) {
+      return 'Password Harus Minimal 6 Karakter';
+    }
+  }
+
+  //From Value
+  String email, name, password;
+
   bool _obsecure = true;
   @override
   Widget build(BuildContext context) {
@@ -26,20 +60,25 @@ class _LoginPageState extends State<LoginPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Container(
-                    height: 470,
+                    height: 500,
                     child: Form(
+                      key: _formKey,
                       child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                            height: 200,
+                            height: 100,
                             child: Image.asset(
                               'assets/berasku_square.png',
                               fit: BoxFit.cover,
                             ),
                           ),
+                          SizedBox(height: 20),
                           TextFormField(
+                            initialValue: 'iyan@gmail.com',
+                            onSaved: (val) => email = val,
+                            validator: _emailValidator,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.symmetric(
@@ -56,6 +95,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           SizedBox(height: 20),
                           TextFormField(
+                            initialValue: '123456',
+                            onSaved: (val) => password = val,
+                            validator: _passwordValidator,
                             obscureText: _obsecure,
                             decoration: InputDecoration(
                               suffix: SizedBox(
@@ -99,8 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                             buttonColor: Colors.red,
                             child: RaisedButton(
                               onPressed: () {
-                                Navigator.pushReplacementNamed(
-                                    context, '/HomePage');
+                                _toHomePage();
                               },
                               child: Text(
                                 'Login',

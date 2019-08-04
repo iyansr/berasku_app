@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
+  final String email, name;
+  HomePage({this.email, this.name});
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -40,9 +42,6 @@ class _HomePageState extends State<HomePage> {
     },
   ];
 
-  String email = 'iyan_saputra@outlook.co.id';
-  String name = 'Iyan Saputra';
-
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -55,9 +54,9 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             UserAccountsDrawerHeader(
               // decoration: BoxDecoration(color: Colors.),
-              accountEmail: Text(email),
+              accountEmail: Text(widget.email),
               accountName: Text(
-                name,
+                widget.name,
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                 ),

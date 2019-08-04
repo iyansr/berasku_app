@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
         '/': (context) => SplashScreen(),
         '/LoginPage': (context) => LoginPage(),
         '/RegisterPage': (context) => RegisterPage(),
-        '/HomePage': (context) => HomePage(),
       },
       debugShowCheckedModeBanner: false,
       title: 'Berasku',
