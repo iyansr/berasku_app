@@ -1,4 +1,4 @@
-import 'package:berasku_app/pages/home_page_v2.dart';
+import 'package:berasku_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
         name = 'Iyan';
       });
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => HomePageV2(name: name, email: email),
+        builder: (context) => HomePage(name: name, email: email),
       ));
     }
   }
