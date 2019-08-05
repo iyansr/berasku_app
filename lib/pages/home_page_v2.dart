@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePageV2 extends StatefulWidget {
+  final String email, name;
+  HomePageV2({this.email, this.name});
   @override
   _HomePageStateV2 createState() => _HomePageStateV2();
 }
@@ -14,12 +17,48 @@ class _HomePageStateV2 extends State<HomePageV2> {
   final Widget gasIcon = SvgPicture.asset('assets/gas-cylinder.svg');
 
   List<String> listImg = [
-    'assets/slider.jpg',
-    'assets/slider.jpg',
-    'assets/slider.jpg',
+    'images/slider1.jpg',
+    'images/slider2.jpg',
+    'images/slider3.jpg',
   ];
 
   var daftarBeras = [
+    {
+      'nama_beras': 'Beras Kepala 50Kg',
+      'harga': '460000',
+      'gambar':
+          'https://cdn.sribu.com/assets/media/contest_detail/2016/10/desain-packing-beras-merek-paijo-57fd3efb9d68b1117b534159/7dc5835584.jpg'
+    },
+    {
+      'nama_beras': 'Beras Kepala 25Kg',
+      'harga': '250000',
+      'gambar':
+          'https://cdn.sribu.com/assets/media/contest_detail/2016/10/desain-packing-beras-merek-paijo-57fd3efb9d68b1117b534159/7dc5835584.jpg'
+    },
+    {
+      'nama_beras': 'Beras Kepala 20Kg',
+      'harga': '200000',
+      'gambar':
+          'https://cdn.sribu.com/assets/media/contest_detail/2016/10/desain-packing-beras-merek-paijo-57fd3efb9d68b1117b534159/7dc5835584.jpg'
+    },
+    {
+      'nama_beras': 'Beras Kepala 50Kg',
+      'harga': '460000',
+      'gambar':
+          'https://cdn.sribu.com/assets/media/contest_detail/2016/10/desain-packing-beras-merek-paijo-57fd3efb9d68b1117b534159/7dc5835584.jpg'
+    },
+    {
+      'nama_beras': 'Beras Kepala 25Kg',
+      'harga': '250000',
+      'gambar':
+          'https://cdn.sribu.com/assets/media/contest_detail/2016/10/desain-packing-beras-merek-paijo-57fd3efb9d68b1117b534159/7dc5835584.jpg'
+    },
+    {
+      'nama_beras': 'Beras Kepala 20Kg',
+      'harga': '200000',
+      'gambar':
+          'https://cdn.sribu.com/assets/media/contest_detail/2016/10/desain-packing-beras-merek-paijo-57fd3efb9d68b1117b534159/7dc5835584.jpg'
+    },
     {
       'nama_beras': 'Beras Kepala 50Kg',
       'harga': '460000',
@@ -45,6 +84,16 @@ class _HomePageStateV2 extends State<HomePageV2> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
+  final TextStyle _boldText = TextStyle(fontWeight: FontWeight.w700);
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,10 +103,17 @@ class _HomePageStateV2 extends State<HomePageV2> {
           physics: BouncingScrollPhysics(),
           children: <Widget>[
             UserAccountsDrawerHeader(
-              // decoration: BoxDecoration(color: Colors.),
-              accountEmail: Text(email),
+              decoration: BoxDecoration(
+                color: Colors.black,
+                image: DecorationImage(
+                    colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.8), BlendMode.dstATop),
+                    image: AssetImage('images/slider2.jpg'),
+                    fit: BoxFit.cover),
+              ),
+              accountEmail: Text(widget.email),
               accountName: Text(
-                name,
+                widget.name,
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                 ),
@@ -70,12 +126,48 @@ class _HomePageStateV2 extends State<HomePageV2> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.people),
-              title: Text('One-line with trailing widget'),
+              onTap: () {},
+              leading: Icon(
+                FontAwesomeIcons.userAlt,
+                color: Colors.black,
+              ),
+              title: Text('Profile', style: _boldText),
             ),
             ListTile(
-              leading: Icon(Icons.people),
-              title: Text('One-line with trailing widget'),
+              onTap: () {},
+              leading: Icon(
+                FontAwesomeIcons.solidCheckSquare,
+                color: Colors.black,
+              ),
+              title: Text('Satus Pembelian', style: _boldText),
+            ),
+            ListTile(
+              onTap: () {},
+              leading: Icon(
+                FontAwesomeIcons.solidQuestionCircle,
+                color: Colors.black,
+              ),
+              title: Text('Bantuan', style: _boldText),
+            ),
+            ListTile(
+              onTap: () {},
+              leading: Icon(
+                FontAwesomeIcons.info,
+                color: Colors.black,
+              ),
+              title: Text('Tentang', style: _boldText),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height / 3.25),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ListTile(
+                onTap: () {},
+                leading: Icon(
+                  FontAwesomeIcons.signOutAlt,
+                  color: Colors.black,
+                ),
+                title: Text('Keluar'),
+              ),
             ),
           ],
         ),
@@ -114,12 +206,12 @@ class _HomePageStateV2 extends State<HomePageV2> {
             children: <Widget>[
               Container(
                 height: 175,
-                color: Colors.red,
+                color: Color(0xffea2c2c),
               ),
               Container(
                 height: 130.0,
                 width: MediaQuery.of(context).size.width,
-                color: Colors.red,
+                color: Color(0xffea2c2c),
                 child: Swiper(
                   itemBuilder: (BuildContext context, int index) {
                     return Image.asset(
@@ -208,17 +300,18 @@ class _HomePageStateV2 extends State<HomePageV2> {
             height: 50.0,
           ),
           Container(
-            height: (daftarBeras.length * 190).toDouble(),
+            height: (daftarBeras.length * 100).toDouble(),
             width: MediaQuery.of(context).size.width,
-            child: ListView.builder(
+            child: GridView.builder(
               physics: NeverScrollableScrollPhysics(),
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
               itemCount: daftarBeras.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   child: Container(
-                    height: 180,
+                    height: 200,
                     width: MediaQuery.of(context).size.width,
                     child: Card(
                       semanticContainer: true,
@@ -253,7 +346,7 @@ class _HomePageStateV2 extends State<HomePageV2> {
                             ),
                             Padding(
                               padding:
-                                  const EdgeInsets.only(left: 20, top: 125),
+                                  const EdgeInsets.only(left: 10, top: 130),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
@@ -262,7 +355,7 @@ class _HomePageStateV2 extends State<HomePageV2> {
                                     style: TextStyle(
                                       fontFamily: 'Raleway',
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 24,
+                                      fontSize: 16,
                                     ),
                                   ),
                                   Text(

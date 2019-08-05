@@ -12,6 +12,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
+    Map<int, Color> color = {
+      50: Color(0xffea2c2c),
+      100: Color(0xffea2c2c),
+      200: Color(0xffea2c2c),
+      300: Color(0xffea2c2c),
+      400: Color(0xffea2c2c),
+      500: Color(0xffea2c2c),
+      600: Color(0xffea2c2c),
+      700: Color(0xffea2c2c),
+      800: Color(0xffea2c2c),
+      900: Color(0xffea2c2c),
+    };
+    final MaterialColor _custColor = MaterialColor(0xffea2c2c, color);
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light),
     );
@@ -26,7 +43,7 @@ class MyApp extends StatelessWidget {
       title: 'Berasku',
       theme: ThemeData(
         fontFamily: 'Raleway',
-        primarySwatch: Colors.red,
+        primarySwatch: _custColor,
       ),
     );
   }
@@ -41,8 +58,9 @@ class SplashScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              child: Image.asset('assets/berasku_circle.png'),
+              child: Image.asset('images/logo.png', scale: 3),
             ),
+            SizedBox(height: 40),
             FloatingActionButton(
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/LoginPage');

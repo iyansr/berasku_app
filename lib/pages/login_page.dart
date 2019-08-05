@@ -1,4 +1,4 @@
-import 'package:berasku_app/pages/home_page.dart';
+import 'package:berasku_app/pages/home_page_v2.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
         name = 'Iyan';
       });
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => HomePage(name: name, email: email),
+        builder: (context) => HomePageV2(name: name, email: email),
       ));
     }
   }
@@ -28,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     } else if (!val.contains('@')) {
       return 'Email Salah';
     }
+    return null;
   }
 
   String _passwordValidator(String val) {
@@ -36,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
     } else if (val.length < 6) {
       return 'Password Harus Minimal 6 Karakter';
     }
+    return null;
   }
 
   //From Value
@@ -45,10 +47,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Color(0xffea2c2c),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
@@ -60,17 +63,17 @@ class _LoginPageState extends State<LoginPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),
                   child: Container(
-                    height: 500,
+                    height: 450,
                     child: Form(
                       key: _formKey,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                            height: 100,
+                            height: 80,
                             child: Image.asset(
-                              'assets/berasku_square.png',
+                              'images/logo_square.png',
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -138,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             minWidth: MediaQuery.of(context).size.width,
                             height: 48,
-                            buttonColor: Colors.red,
+                            buttonColor: Color(0xffea2c2c),
                             child: RaisedButton(
                               onPressed: () {
                                 _toHomePage();
@@ -161,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               child: Text(
                                 'Register',
-                                style: TextStyle(color: Colors.red),
+                                style: TextStyle(color: Color(0xffea2c2c)),
                               ),
                             ),
                           ),

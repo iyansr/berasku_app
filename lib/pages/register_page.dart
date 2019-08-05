@@ -1,4 +1,4 @@
-import 'package:berasku_app/pages/home_page.dart';
+import 'package:berasku_app/pages/home_page_v2.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -25,7 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => HomePage(name: name, email: email),
+        builder: (context) => HomePageV2(name: name, email: email),
       ));
     }
   }
@@ -36,12 +36,14 @@ class _RegisterPageState extends State<RegisterPage> {
     } else if (!val.contains('@')) {
       return 'Email Salah';
     }
+    return null;
   }
 
   String _namaValidator(String val) {
     if (val.isEmpty) {
       return 'Form Tidak Boleh Kosong';
     }
+    return null;
   }
 
   String _passwordValidator(String val) {
@@ -50,6 +52,7 @@ class _RegisterPageState extends State<RegisterPage> {
     } else if (val.length < 6) {
       return 'Password Harus Minimal 6 Karakter';
     }
+    return null;
   }
 
   String _passwordValidator2(String val) {
@@ -58,20 +61,21 @@ class _RegisterPageState extends State<RegisterPage> {
     } else if (val != _password1Ctrl.text) {
       return 'Password Harus Sama';
     }
+    return null;
   }
 
   String email, name, password1, password2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Color(0xffea2c2c),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 20.0, right: 20.0),
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Container(
-              height: /*740,*/ MediaQuery.of(context).size.height - 40,
+              height: /*740,*/ MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Center(
                 child: Card(
@@ -81,21 +85,21 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(24.0),
                     child: Container(
-                      height: 700,
+                      height: 500,
                       child: Form(
                         key: _formKey,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Container(
-                              height: 100,
+                              height: 80,
                               child: Image.asset(
-                                'assets/berasku_square.png',
+                                'images/logo_square.png',
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            SizedBox(height: 20),
+                            // SizedBox(height: 20),
                             TextFormField(
                               initialValue: 'IyanSR',
                               onSaved: (val) => name = val,
@@ -114,7 +118,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20),
+                            // SizedBox(height: 20),
                             TextFormField(
                               initialValue: 'iyan@gmail.com',
                               onSaved: (val) => email = val,
@@ -133,7 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20),
+                            // SizedBox(height: 20),
                             TextFormField(
                               controller: _password1Ctrl,
                               onSaved: (val) => password1 = val,
@@ -171,7 +175,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20),
+                            // SizedBox(height: 20),
                             TextFormField(
                               controller: _password2Ctrl,
                               onSaved: (val) => password2 = val,
@@ -209,14 +213,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20),
+                            // SizedBox(height: 20),
                             ButtonTheme(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               minWidth: MediaQuery.of(context).size.width,
                               height: 48,
-                              buttonColor: Colors.red,
+                              buttonColor: Color(0xffea2c2c),
                               child: RaisedButton(
                                 onPressed: () {
                                   _toHomePage();
@@ -229,7 +233,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20),
+                            // SizedBox(height: 20),
                             ButtonTheme(
                               height: 10,
                               child: FlatButton(
@@ -239,7 +243,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 },
                                 child: Text(
                                   'Login',
-                                  style: TextStyle(color: Colors.red),
+                                  style: TextStyle(color: Color(0xffea2c2c)),
                                 ),
                               ),
                             ),
