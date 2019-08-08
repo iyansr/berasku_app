@@ -1,4 +1,9 @@
+import 'package:berasku_app/pages/about_page.dart';
+import 'package:berasku_app/pages/chart_page.dart';
+import 'package:berasku_app/pages/help_page.dart';
 import 'package:berasku_app/pages/profile_page.dart';
+import 'package:berasku_app/pages/status_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -39,8 +44,7 @@ class _HomePageState extends State<HomePage> {
     {
       'nama_beras': 'Beras Kepala 20Kg',
       'harga': '200000',
-      'gambar':
-          'https://cdn.sribu.com/assets/media/contest_detail/2016/10/desain-packing-beras-merek-paijo-57fd3efb9d68b1117b534159/7dc5835584.jpg'
+      'gambar': 'https://cf.shopee.co.id/file/3241efa475d92317f6e76d03d004c89b'
     },
     {
       'nama_beras': 'Beras Kepala 50Kg',
@@ -80,9 +84,6 @@ class _HomePageState extends State<HomePage> {
     },
   ];
 
-  String email = 'iyan_saputra@outlook.co.id';
-  String name = 'Iyan Saputra';
-
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   final TextStyle _boldText = TextStyle(fontWeight: FontWeight.w700);
@@ -98,7 +99,35 @@ class _HomePageState extends State<HomePage> {
   void _toProfile() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ProfilePage()),
+      MaterialPageRoute(builder: (context) => ProfilePage(name: widget.name)),
+    );
+  }
+
+  void _toAbout() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AboutPage()),
+    );
+  }
+
+  void _toHelp() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HelpPage()),
+    );
+  }
+
+  void _toStatus() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => StatusPage()),
+    );
+  }
+
+  void _toChart() {
+    Navigator.push(
+      context,
+      CupertinoPageRoute(builder: (context) => ChartPage()),
     );
   }
 
@@ -142,7 +171,7 @@ class _HomePageState extends State<HomePage> {
               title: Text('Profile', style: _boldText),
             ),
             ListTile(
-              onTap: () {},
+              onTap: _toStatus,
               leading: Icon(
                 FontAwesomeIcons.solidCheckSquare,
                 color: Colors.black,
@@ -150,7 +179,7 @@ class _HomePageState extends State<HomePage> {
               title: Text('Satus Pembelian', style: _boldText),
             ),
             ListTile(
-              onTap: () {},
+              onTap: _toHelp,
               leading: Icon(
                 FontAwesomeIcons.solidQuestionCircle,
                 color: Colors.black,
@@ -158,7 +187,7 @@ class _HomePageState extends State<HomePage> {
               title: Text('Bantuan', style: _boldText),
             ),
             ListTile(
-              onTap: () {},
+              onTap: _toAbout,
               leading: Icon(
                 FontAwesomeIcons.info,
                 color: Colors.black,
@@ -169,7 +198,9 @@ class _HomePageState extends State<HomePage> {
             Align(
               alignment: Alignment.bottomCenter,
               child: ListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushReplacementNamed('/LoginPage');
+                },
                 leading: Icon(
                   FontAwesomeIcons.signOutAlt,
                   color: Colors.black,
@@ -185,9 +216,7 @@ class _HomePageState extends State<HomePage> {
           actions: <Widget>[
             IconButton(
               padding: EdgeInsets.all(0),
-              onPressed: () {
-                print(daftarBeras.length);
-              },
+              onPressed: _toChart,
               icon: Icon(
                 FontAwesomeIcons.shoppingCart,
               ),
@@ -252,49 +281,59 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Column(
-                            children: <Widget>[
-                              GestureDetector(
-                                onTap: () {
-                                  print('beras');
-                                },
-                                child: SizedBox(
-                                  width: 36,
-                                  height: 36,
-                                  child: berasIcon,
+                        InkWell(
+                          onTap: () => print('Beras'),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Column(
+                              children: <Widget>[
+                                SizedBox(
+                                    width: 36, height: 36, child: berasIcon),
+                                Text(
+                                  'Beras',
+                                  style: TextStyle(color: Colors.grey),
                                 ),
-                              ),
-                              Text(
-                                'Beras',
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Column(
-                            children: <Widget>[
-                              SizedBox(width: 36, height: 36, child: gasIcon),
-                              Text(
-                                'Gas',
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            ],
+                        InkWell(
+                          onTap: () {
+                            _scaffoldKey.currentState.showSnackBar(SnackBar(
+                              content: Text('Coming Soon!'),
+                            ));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Column(
+                              children: <Widget>[
+                                SizedBox(width: 36, height: 36, child: gasIcon),
+                                Text(
+                                  'Gas',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Column(
-                            children: <Widget>[
-                              SizedBox(width: 36, height: 36, child: galonIcon),
-                              Text(
-                                'Galon',
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            ],
+                        InkWell(
+                          onTap: () {
+                            _scaffoldKey.currentState.showSnackBar(SnackBar(
+                              content: Text('Coming Soon!'),
+                            ));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Column(
+                              children: <Widget>[
+                                SizedBox(
+                                    width: 36, height: 36, child: galonIcon),
+                                Text(
+                                  'Galon',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
