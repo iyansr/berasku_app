@@ -1,6 +1,5 @@
-# berasku_app
-
-A new Flutter project.
+# Berasku app
+Berasku app adalah aplikasi untuk memesan beras, galon dan gas.
 
 ## Getting Started
 
